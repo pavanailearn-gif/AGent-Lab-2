@@ -1,0 +1,14 @@
+{
+  "transactions": [
+    { "transaction_id": "TXN-90001", "customer_id": "CUST-1001", "account_id": "ACC-100101", "date": "2026-08-18", "type": "credit", "amount": 50000.00, "description": "Salary credit", "status": "Completed" },
+    { "transaction_id": "TXN-90002", "customer_id": "CUST-1001", "account_id": "ACC-100101", "date": "2026-08-15", "type": "debit", "amount": 4200.00, "description": "Utility bill payment", "status": "Completed" },
+    { "transaction_id": "TXN-90003", "customer_id": "CUST-1001", "account_id": "ACC-100102", "date": "2026-08-10", "type": "debit", "amount": 12500.00, "description": "Card purchase - electronics store", "status": "Completed" },
+    { "transaction_id": "TXN-90004", "customer_id": "CUST-1002", "account_id": "ACC-100201", "date": "2026-08-17", "type": "debit", "amount": 15000.00, "description": "Personal loan EMI", "status": "Completed" },
+    { "transaction_id": "TXN-90005", "customer_id": "CUST-1002", "account_id": "ACC-100201", "date": "2026-08-12", "type": "credit", "amount": 2000.00, "description": "Interest credit", "status": "Completed" },
+    { "transaction_id": "TXN-90006", "customer_id": "CUST-1003", "account_id": "ACC-100301", "date": "2026-08-16", "type": "debit", "amount": 500.00, "description": "ATM withdrawal", "status": "Completed" },
+    { "transaction_id": "TXN-90007", "customer_id": "CUST-1003", "account_id": "ACC-100301", "date": "2026-08-05", "type": "debit", "amount": 1200.00, "description": "Online purchase declined - insufficient funds", "status": "Failed" },
+    { "transaction_id": "TXN-90008", "customer_id": "CUST-1004", "account_id": "ACC-100401", "date": "2026-08-19", "type": "credit", "amount": 300000.00, "description": "Business receipt", "status": "Completed" },
+    { "transaction_id": "TXN-90009", "customer_id": "CUST-1004", "account_id": "ACC-100402", "date": "2026-08-01", "type": "debit", "amount": 42000.00, "description": "Home loan EMI", "status": "Completed" },
+    { "transaction_id": "TXN-90010", "customer_id": "CUST-1005", "account_id": "ACC-100501", "date": "2026-05-02", "type": "debit", "amount": 200.00, "description": "Annual maintenance fee", "status": "Completed" }
+  ]
+}

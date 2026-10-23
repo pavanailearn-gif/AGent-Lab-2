@@ -1,0 +1,119 @@
+﻿# Agent Workflow Configuration
+# This file defines the behavior and parameters for the Enterprise AI Customer Operations Agent
+
+# Workflow Settings
+workflow:
+  name: "customer_operations_agent"
+  version: "1.0.0"
+  
+  # Node configuration for LangGraph workflow
+  nodes:
+    - entry
+    - classify_intent
+    - route_decision
+    - retrieve_knowledge
+    - invoke_tool
+    - generate_response
+    - clarify
+    - escalate
+  
+  # Routing thresholds
+  routing:
+    confidence_threshold: 0.7
+    clarification_threshold: 0.5
+    escalation_keywords:
+      - "complaint"
+      - "fraud"
+      - "dispute"
+      - "rejected"
+      - "denied"
+      - "manager"
+
+# Knowledge Retrieval Settings
+knowledge:
+  max_documents: 5
+  similarity_threshold: 0.4
+  chunk_size: 1000
+  chunk_overlap: 200
+  
+# Tool Invocation Settings  
+tools:
+  enabled: true
+  available_tools:
+    - get_product_catalog
+    - find_branch_info
+    - check_eligibility
+  
+  # Tool selection confidence
+  tool_confidence_threshold: 0.8
+
+# Response Generation Settings
+response:
+  include_citations: true
+  max_citation_length: 100
+  require_sources: true
+  min_confidence_for_response: 0.6
+
+# Clarification Settings
+clarification:
+  enabled: true
+  max_clarification_attempts: 2
+  trigger_on_ambiguity: true
+
+# Escalation Settings
+escalation:
+  enabled: true
+  sensitive_topics:
+    - loan_rejection
+    - account_closure
+    - fraud_investigation
+    - privacy_concern
+  
+# Logging
+logging:
+  level: "INFO"
+  log_queries: true
+  log_retrievals: true
+  log_tool_calls: true
+
+# ---------------------------------------------------------------------------
+# Bootcamp 2 additions below. These are new keys alongside the Bootcamp 1
+# keys above (which the vendored src/bootcamp1_agent agent still reads as-is)
+# - nothing above this line was renamed or removed.
+# ---------------------------------------------------------------------------
+
+# Coordinator Agent routing settings - read by src/core/decision_engine.py
+coordination:
+  # The sub-agents the Coordinator Agent can route a turn to. Exactly one is
+  # chosen per turn (see Bootcamp_2_Project_Configuration.md's scope-bounding
+  # decisions - this is intentionally not a generalized N-agent router).
+  routes:
+    - knowledge_agent
+    - customer_service_agent
+  # Route used when the LLM's routing response can't be parsed or names a
+  # route outside the list above.
+  default_route: knowledge_agent
+  # Below this confidence, DecisionEngine.route_query() still returns the
+  # LLM's chosen route, but callers may choose to log/flag it as low-confidence.
+  confidence_threshold: 0.6
+
+# Function-calling / structured-output action selection - read by
+# src/core/decision_engine.py's select_action()
+action_selection:
+  # At most one tool call is selected per query (one clean example of the
+  # pattern, not a multi-tool planner).
+  max_tool_calls: 1
+
+# Retry-with-backoff settings - read by src/utils/retry.py's with_retry()
+# default arguments. One wrapper, applied once (see agents/customer_service_agent.py's
+# _execute_tool), not a comprehensive resilience framework.
+retry:
+  max_attempts: 3
+  backoff_seconds: 0.5
+
+# Response validation settings - read by src/utils/response_validator.py's
+# ResponseValidator. A field-presence check, not a validation framework.
+validation:
+  required_response_fields:
+    - response
+    - source

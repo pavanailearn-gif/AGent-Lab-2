@@ -1,0 +1,61 @@
+# Core Dependencies
+python-dotenv==1.0.0
+
+# LLM and AI Framework
+# langchain and langchain-openai removed - not imported anywhere in src/ or
+# reference_solution/src/ (confirmed via grep); this project talks to the
+# OpenAI-compatible API directly through the openai SDK (see src/llm/llm_client.py,
+# src/knowledge/embeddings.py) and OpenAI-native function calling
+# (src/core/decision_engine.py), not through LangChain abstractions.
+openai==2.9.0
+langgraph==1.1.6
+# pydantic pinned explicitly (Python 3.14 compatibility) - left unpinned, pip's
+# resolver can backtrack into an old pydantic/pydantic-core combination that has
+# no prebuilt wheel for Python 3.14 and fails to build from source (PyO3 doesn't
+# support 3.14 yet). 2.13.3 is the first version whose matching pydantic-core
+# (2.46.3) ships a cp314 wheel.
+pydantic==2.13.3
+
+# Note: Activity 2.3 (structured outputs) uses the OpenAI SDK's native function-calling
+# response objects directly (parsed with json.loads()), and Activity 3.2 (retry) is a
+# small hand-rolled backoff loop - see src/utils/retry.py. Neither pydantic nor tenacity
+# is a runtime dependency of this project's reference solution (pydantic above is a
+# transitive-version pin only).
+
+# Vector Database and Embeddings (reused knowledge base from Bootcamp 1; embeddings
+# come from the OpenAI-compatible API via src/knowledge/embeddings.py, not a local model)
+# Note: 1.7.4 has no prebuilt wheel for newer Python versions (confirmed on
+# Ubuntu - pip only offered 1.12.0+). Pinned to the oldest available version
+# instead - only IndexFlatL2/add/search/write_index/read_index are used here,
+# which are stable, unchanged APIs across this range.
+faiss-cpu==1.12.0
+
+# Data Processing
+# pandas removed - not imported anywhere in src/ or reference_solution/src/
+# (confirmed via grep); also unblocks the numpy 2.x bump below (pandas==2.1.4
+# fails to build on Python 3.14 and older pandas releases pin numpy<2).
+numpy==2.3.2
+
+# UI Framework
+streamlit==1.46.1
+
+# Configuration
+pyyaml==6.0.3
+
+# Utilities
+# requests and python-json-logger removed - not imported anywhere in src/ or
+# reference_solution/src/ (logger.py uses plain stdlib logging); also avoids a
+# pip conflict with apache-airflow-providers-http when this venv is shared
+# with another project.
+
+# Testing
+# pytest, pytest-cov, and pytest-asyncio removed - the tests/ directory held
+# no test files (just an empty __init__.py, now removed along with it), and
+# no activity script invokes pytest (unlike Bootcamp 3's Activity 3.1, this
+# project has no pytest-based activity). README.md's old "pytest tests/"
+# instruction was stale.
+
+# Type Hints
+# 4.15.0 satisfies openai's >=4.11,<5, streamlit's >=4.4.0,<5, and pydantic's
+# >=4.14.1 with zero resolver backtracking.
+typing-extensions==4.15.0

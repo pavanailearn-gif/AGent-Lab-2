@@ -1,0 +1,72 @@
+{
+  "customers": [
+    {
+      "customer_id": "CUST-1001",
+      "name": "Ananya Rao",
+      "email": "ananya.rao@example.com",
+      "phone": "+91-98200-11122",
+      "date_of_birth": "1990-04-12",
+      "segment": "Premium",
+      "kyc_status": "Verified",
+      "city": "Mumbai",
+      "accounts": [
+        { "account_id": "ACC-100101", "type": "savings", "product_id": "SAV-002", "balance": 245000.50, "status": "Active" },
+        { "account_id": "ACC-100102", "type": "credit_card", "product_id": "CC-001", "balance": -18400.00, "status": "Active" }
+      ]
+    },
+    {
+      "customer_id": "CUST-1002",
+      "name": "Rohit Sharma",
+      "email": "rohit.sharma@example.com",
+      "phone": "+91-98200-33344",
+      "date_of_birth": "1985-11-02",
+      "segment": "Retail",
+      "kyc_status": "Verified",
+      "city": "Bengaluru",
+      "accounts": [
+        { "account_id": "ACC-100201", "type": "savings", "product_id": "SAV-001", "balance": 52300.00, "status": "Active" },
+        { "account_id": "ACC-100202", "type": "personal_loan", "product_id": "PL-001", "balance": -310000.00, "status": "Active" }
+      ]
+    },
+    {
+      "customer_id": "CUST-1003",
+      "name": "Priya Nair",
+      "email": "priya.nair@example.com",
+      "phone": "+91-98200-55566",
+      "date_of_birth": "1998-07-21",
+      "segment": "Retail",
+      "kyc_status": "Pending",
+      "city": "Chennai",
+      "accounts": [
+        { "account_id": "ACC-100301", "type": "savings", "product_id": "SAV-001", "balance": 8100.25, "status": "Active" }
+      ]
+    },
+    {
+      "customer_id": "CUST-1004",
+      "name": "Vikram Singh",
+      "email": "vikram.singh@example.com",
+      "phone": "+91-98200-77788",
+      "date_of_birth": "1979-01-30",
+      "segment": "Premium",
+      "kyc_status": "Verified",
+      "city": "Delhi",
+      "accounts": [
+        { "account_id": "ACC-100401", "type": "current", "product_id": "CUR-001", "balance": 980500.00, "status": "Active" },
+        { "account_id": "ACC-100402", "type": "home_loan", "product_id": "HL-001", "balance": -4200000.00, "status": "Active" }
+      ]
+    },
+    {
+      "customer_id": "CUST-1005",
+      "name": "Meera Iyer",
+      "email": "meera.iyer@example.com",
+      "phone": "+91-98200-99900",
+      "date_of_birth": "2001-09-15",
+      "segment": "Retail",
+      "kyc_status": "Verified",
+      "city": "Pune",
+      "accounts": [
+        { "account_id": "ACC-100501", "type": "savings", "product_id": "SAV-001", "balance": 15600.00, "status": "Dormant" }
+      ]
+    }
+  ]
+}

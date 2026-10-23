@@ -1,0 +1,68 @@
+{
+  "test_scenarios": [
+    {
+      "id": "TEST-001",
+      "category": "knowledge",
+      "query": "What documents do I need to open a savings account?",
+      "customer_id": null,
+      "expected_route": "knowledge_agent",
+      "expected_tool": null
+    },
+    {
+      "id": "TEST-002",
+      "category": "knowledge",
+      "query": "How do I report a lost debit card?",
+      "customer_id": null,
+      "expected_route": "knowledge_agent",
+      "expected_tool": null
+    },
+    {
+      "id": "TEST-003",
+      "category": "knowledge",
+      "query": "What is the interest rate on personal loans?",
+      "customer_id": null,
+      "expected_route": "knowledge_agent",
+      "expected_tool": null
+    },
+    {
+      "id": "TEST-004",
+      "category": "service",
+      "query": "Can you pull up my account profile?",
+      "customer_id": "CUST-1001",
+      "expected_route": "customer_service_agent",
+      "expected_tool": "get_customer_profile"
+    },
+    {
+      "id": "TEST-005",
+      "category": "service",
+      "query": "Show me my most recent transactions.",
+      "customer_id": "CUST-1002",
+      "expected_route": "customer_service_agent",
+      "expected_tool": "get_recent_transactions"
+    },
+    {
+      "id": "TEST-006",
+      "category": "service",
+      "query": "My debit card was stolen, please block it and open a request.",
+      "customer_id": "CUST-1003",
+      "expected_route": "customer_service_agent",
+      "expected_tool": "create_service_request"
+    },
+    {
+      "id": "TEST-007",
+      "category": "edge_case",
+      "query": "What is the minimum balance requirement, and can you also check mine?",
+      "customer_id": "CUST-1004",
+      "expected_route": "customer_service_agent",
+      "expected_tool": "get_customer_profile"
+    },
+    {
+      "id": "TEST-008",
+      "category": "edge_case",
+      "query": "I'm not happy with the service I received last week.",
+      "customer_id": "CUST-1005",
+      "expected_route": "customer_service_agent",
+      "expected_tool": "create_service_request"
+    }
+  ]
+}

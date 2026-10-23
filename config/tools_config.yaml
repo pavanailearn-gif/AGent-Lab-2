@@ -1,0 +1,66 @@
+# Tool Registry Configuration
+# Declares the enterprise-service tools the Tool Registry (src/tools/tool_registry.py)
+# makes available to the platform. Each entry is read by ToolRegistry.load_from_config()
+# to wire a tool name to the Python function that implements it, and to describe the
+# tool (name/description/parameters) in the JSON-schema shape the Decision Engine's
+# function-calling step (Activity 2.3) hands to the LLM.
+
+tools:
+  - name: get_customer_profile
+    description: >
+      Look up a bank customer's profile (identity, segment, KYC status, and
+      linked accounts) by customer ID.
+    module: src.services.customer_profile_service
+    function: get_customer_profile
+    parameters:
+      type: object
+      properties:
+        customer_id:
+          type: string
+          description: "The customer's unique ID, e.g. CUST-1001."
+      required: ["customer_id"]
+
+  - name: get_recent_transactions
+    description: >
+      Retrieve a customer's most recent transactions across their accounts,
+      most recent first.
+    module: src.services.transaction_service
+    function: get_recent_transactions
+    parameters:
+      type: object
+      properties:
+        customer_id:
+          type: string
+          description: "The customer's unique ID, e.g. CUST-1001."
+        limit:
+          type: integer
+          description: "Maximum number of transactions to return."
+          default: 5
+      required: ["customer_id"]
+
+  - name: create_service_request
+    description: >
+      Open a new customer service request (e.g. a complaint, a card block
+      request, or an account update) and return a tracking ID.
+    module: src.services.service_request_service
+    function: create_service_request
+    parameters:
+      type: object
+      properties:
+        customer_id:
+          type: string
+          description: "The customer's unique ID, e.g. CUST-1001."
+        request_type:
+          type: string
+          description: "Category of the request, e.g. 'card_block', 'complaint', 'account_update'."
+        description:
+          type: string
+          description: "Free-text description of what the customer needs."
+      required: ["customer_id", "request_type", "description"]
+
+# Registry-level settings (read by ToolRegistry).
+registry:
+  # Tool execution is expected to raise on failure - fail_on_missing_tool
+  # controls whether looking up an unregistered tool name is a hard error
+  # (True) or returns None (False).
+  fail_on_missing_tool: true
